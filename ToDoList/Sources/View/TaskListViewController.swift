@@ -156,12 +156,24 @@ extension TaskListViewController: UITableViewDataSource,UITableViewDelegate, UIS
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell else { return UITableViewCell() }
         let task = viewModel.filteredTasks[indexPath.row]
         cell.configure(with: task, currentDate: viewModel.getFormattedDate(for: task))
+        cell.selectionStyle = .none
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let task = viewModel.filteredTasks[indexPath.row]
+        let editViewController = TaskEditViewController()
+        editViewController.task = task
         
+        editViewController.onTaslUpdate = { [weak self] updatedtask in
+            guard let self = self else { return }
+            self.viewModel.updateTask(updatedTask: updatedtask)
+            self.viewModel.fetchTasks()
+        }
+        
+        navigationController?.pushViewController(editViewController, animated: true)
+        print("Selected row:\(indexPath.row)")
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

@@ -47,7 +47,19 @@ class CoreDataManager {
         } catch {
             print("Error has been occured \(error)")
         }
+    }
+    
+    //MARK: - Update data
+    func update(updatedTask: Task) {
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        guard let context = appDelegate?.persistentContainer.viewContext else { return }
         
+        do {
+            try context.save()
+            print("Date updated")
+        } catch {
+            print("Error has been occured \(error)")
+        }
     }
     
     //MARK: - Delete data

@@ -31,7 +31,7 @@ class TaskViewModel {
         if let date = task.dateCreated {
             return dateFormatter.string(for: date)!
         }
-            return "No date"
+        return "No date"
     }
     
     func addTask(title: String, details: String) {
@@ -60,13 +60,19 @@ class TaskViewModel {
                 if self.filteredTasks.isEmpty {
                     self.filteredTasks = self.tasks
                     print("Not found by query: \(query)")
-                } 
+                }
             }
             DispatchQueue.main.async {
                 self.onTaskUpdated?()
             }
         }
-        
+    }
+    
+    func updateTask(updatedTask: Task) {
+        DispatchQueue.global(qos: .background).async {
+            self.coreDataManager.update(updatedTask: updatedTask)
+            self.fetchTasks()
+        }
     }
 }
 

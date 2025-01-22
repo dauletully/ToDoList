@@ -14,7 +14,7 @@ class TableViewCell: UITableViewCell {
         let icon = UIImageView()
         icon.translatesAutoresizingMaskIntoConstraints = false
         icon.contentMode = .scaleAspectFill
-        
+
         return icon
     }()
     
@@ -54,7 +54,6 @@ class TableViewCell: UITableViewCell {
         contentView.addSubview(dateLabel)
         
         setupConstraints()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -93,9 +92,6 @@ class TableViewCell: UITableViewCell {
         detailsLabel.text = task.details
         dateLabel.text = currentDate
     }
-    
-    
-    
 }
 
 
