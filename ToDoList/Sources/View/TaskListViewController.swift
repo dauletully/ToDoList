@@ -172,8 +172,7 @@ extension TaskListViewController: UITableViewDataSource,UITableViewDelegate, UIS
             self.viewModel.fetchTasks()
         }
         
-        navigationController?.pushViewController(editViewController, animated: true)
-        print("Selected row:\(indexPath.row)")
+        navigationController?.pushViewController(editViewController, animated: false)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
